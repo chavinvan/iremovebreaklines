@@ -1,0 +1,9 @@
+{
+    "btn_login": "Login",
+    "btn_register": "Create account",
+    "btn_next": "Next",
+    "hint_email": "Insert your email",
+    "hint_username": "Insert an username",
+    "hint_password": "Choose a password",
+    "hint_rpt_password": "Repeat the password"
+}
