@@ -1,79 +1,77 @@
 import 'package:auto_route/annotations.dart';
+import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
+  PageController pageController = PageController();
+  SideMenuController sideMenu = SideMenuController();
+  // https://pub.dev/packages/easy_sidemenu
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Remove Line Breaks Tool'),
-        backgroundColor: Colors.blue, // Customize the app bar color
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              'Input Text',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: TextField(
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Output Text',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: TextField(
-                maxLines: null,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Add your functionality here
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue, // Customize the button color
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-              ),
-              child: Text(
-                'Remove Line Breaks',
-                style: TextStyle(
-                  color: Colors.white, // Customize the button text color
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ],
+    List<SideMenuItem> items = [
+      SideMenuItem(
+        title: 'Dashboard',
+        onTap: (index, _) {
+          sideMenu.changePage(index);
+        },
+        icon: Icon(Icons.home),
+        badgeContent: Text(
+          '3',
+          style: TextStyle(color: Colors.white),
         ),
+      ),
+      SideMenuItem(
+        title: 'Settings',
+        onTap: (index, _) {
+          sideMenu.changePage(index);
+        },
+        icon: Icon(Icons.settings),
+      ),
+      SideMenuItem(
+        title: 'Exit',
+        onTap: (_, _a) {},
+        icon: Icon(Icons.exit_to_app),
+      ),
+    ];
+    return Scaffold(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SideMenu(
+            // Page controller to manage a PageView
+            controller: sideMenu,
+            // Will shows on top of all items, it can be a logo or a Title text
+            title: Text('IRB'),
+            // Will show on bottom of SideMenu when displayMode was SideMenuDisplayMode.open
+            footer: Text('demo'),
+            // Notify when display mode changed
+            onDisplayModeChanged: (mode) {
+              print(mode);
+            },
+            // List of SideMenuItem to show them on SideMenu
+            items: items,
+          ),
+          Expanded(
+            child: PageView(
+              controller: pageController,
+              children: [
+                Container(
+                  child: Center(
+                    child: Text('Dashboard'),
+                  ),
+                ),
+                Container(
+                  child: Center(
+                    child: Text('Settings'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
