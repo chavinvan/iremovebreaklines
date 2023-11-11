@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iremovebreaklines/pages/widgets/text_card.dart';
 import 'package:iremovebreaklines/utils/extensions/color_extension.dart';
 import 'package:sizer/sizer.dart';
 
@@ -9,8 +10,13 @@ import 'package:sizer/sizer.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  PageController pageController = PageController();
-  SideMenuController sideMenu = SideMenuController();
+  final PageController pageController = PageController();
+  final SideMenuController sideMenu = SideMenuController();
+
+  void textChanged(String textId, String value) {
+    print('textId: $textId, value: $value');
+  }
+
   // https://pub.dev/packages/easy_sidemenu
   @override
   Widget build(BuildContext context) {
@@ -63,163 +69,15 @@ class HomeScreen extends StatelessWidget {
             child: PageView(
               controller: pageController,
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 50.h,
-                          child: Card(
-                            color: HexColor.fromHex('#F8FAFC'),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Enter your text here',
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: TextField(
-                                      maxLines: null,
-                                      expands: true,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Enter your text here',
-                                      ),
-                                      style: GoogleFonts.notoSans(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 50.h,
-                          child: Card(
-                            color: HexColor.fromHex('#F8FAFC'),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Enter your text here',
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: TextField(
-                                      maxLines: null,
-                                      expands: true,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Enter your text here',
-                                      ),
-                                      style: GoogleFonts.notoSans(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 50.h,
-                          child: Card(
-                            color: HexColor.fromHex('#F8FAFC'),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Enter your text here',
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: TextField(
-                                      maxLines: null,
-                                      expands: true,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Enter your text here',
-                                      ),
-                                      style: GoogleFonts.notoSans(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: 50.h,
-                          child: Card(
-                            color: HexColor.fromHex('#F8FAFC'),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Enter your text here',
-                                    style: GoogleFonts.notoSans(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: TextField(
-                                      maxLines: null,
-                                      expands: true,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Enter your text here',
-                                      ),
-                                      style: GoogleFonts.notoSans(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return TextCard(
+                      textId: '1',
+                      onChanged: textChanged,
+                    );
+                  },
                 ),
                 Container(
                   child: Center(
