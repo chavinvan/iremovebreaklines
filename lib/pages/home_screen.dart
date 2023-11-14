@@ -1,7 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iremovebreaklines/cubit/cubit/text_cleaner_cubit.dart';
 import 'package:iremovebreaklines/pages/widgets/text_card.dart';
 import 'package:iremovebreaklines/utils/extensions/color_extension.dart';
 import 'package:sizer/sizer.dart';
@@ -12,10 +14,6 @@ class HomeScreen extends StatelessWidget {
 
   final PageController pageController = PageController();
   final SideMenuController sideMenu = SideMenuController();
-
-  void textChanged(String textId, String value) {
-    print('textId: $textId, value: $value');
-  }
 
   // https://pub.dev/packages/easy_sidemenu
   @override
@@ -69,15 +67,17 @@ class HomeScreen extends StatelessWidget {
             child: PageView(
               controller: pageController,
               children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return TextCard(
-                      textId: '1',
-                      onChanged: textChanged,
-                    );
-                  },
+                BlocProvider(
+                  create: (context) => TextCleanerCubit(),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return TextCard(
+                        textId: '1',
+                      );
+                    },
+                  ),
                 ),
                 Container(
                   child: Center(
